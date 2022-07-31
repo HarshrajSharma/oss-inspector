@@ -44,7 +44,7 @@ const runFullAnalyzer = async ({githubURL, package, purl}) => {
 	console.log('Credibility score\nScore >= 10 == very good\n Score ~ 5 == average');
 	console.log(credReport, '\n\n')
 
-	console.log('Final Score: '+(osvReport.score + popularityReport.score+ credReport.score));
+	console.log('Final Score [(10 - vulnerabilityScore) + PopularityScore + CredibilityScore ] : '+( (10 - osvReport.score) + popularityReport.score+ credReport.score));
 }
 const main = async () => {
 	console.log('Welcome to OSS Inspector!!');
