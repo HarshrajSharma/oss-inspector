@@ -12,6 +12,8 @@
     "@octokit/auth-app": "^4.0.4",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
-    "octokit": "^2.0.4"
+    "octokit": "^2.0.4",
+    "@neuralegion/cvss": "^1.2.2",
+    "sentiment": "^5.0.2"
   }
 }
