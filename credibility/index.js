@@ -220,20 +220,15 @@ async function getGHRepoOverallReport(repo_url){
 
 	console.log('Getting Owner details for '+repo.full_name);
 	const repoOwnerScore = await getGHRepoOwnerReport(repo);
-	console.log(repo.full_name,'Repo_Owner_Score',repoOwnerScore);
 
 	console.log('Getting star details for '+repo.full_name);
 	const repoStarScore = await getGHRepoStarReport(repo);
-	console.log(repo.full_name,'Repo_Star_Score',repoStarScore);
 
 	console.log('Getting activity details for '+repo.full_name);
 	const repoActivityScore = await getGHRepoActivityScore(repo);
-	console.log(repo.full_name,'Repo_Activity_Score',repoActivityScore);
 
 	console.log('Getting contributors details for '+repo.full_name);
 	const repoContributorsScore = await getGHRepoContributorsScore(repo);
-	console.log(repo.full_name,'Repo_Contributors_Score',repoContributorsScore);
-
 	console.log('Final report generated');
 	const finalReport = {
 		score: (repoOwnerScore.score + repoStarScore.score + repoActivityScore + repoContributorsScore ) / 4,

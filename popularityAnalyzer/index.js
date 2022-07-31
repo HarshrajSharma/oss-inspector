@@ -12,16 +12,11 @@ async function popularityAnalyzer({twitterAccessToken, query}) {
     let hackerCounter = 0;
 
     const queryString = query;
-    console.log(queryString);
-
-    console.log('Fetching data .....');
-
     const responseTwitter = await axios.get(`https://api.twitter.com/2/tweets/search/recent?query=${queryString}`, {
         headers: {
             Authorization: `Bearer ${Bearer_Token}`
         }
     });
-    console.log('Analyzing data .....');
     responseTwitter.data.data.forEach((element) => {
         let currentTwitterScore = sentiment.analyze(element.text).score;
         twitterScore = twitterScore + currentTwitterScore;
@@ -37,8 +32,6 @@ async function popularityAnalyzer({twitterAccessToken, query}) {
     //score range 0 -10
     hackerScore = hackerScore / hackerCounter +  5;
     twitterScore = twitterScore / twitterCounter + 5;
-    console.log('Twitter Score: ', twitterScore);
-    console.log('HackerNews Score: ', hackerScore); 
   
     return {
         score: (hackerScore + twitterScore) / 2,

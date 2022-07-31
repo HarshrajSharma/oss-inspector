@@ -1,11 +1,13 @@
-const parseNpmUri = async function (url) {
+const { default: axios } = require("axios");
+
+const parseNpmURL = async function (url) {
 
 
 
     const urlNew = new URL(url);
     const [, , packageName] = urlNew.pathname.split('/');
 
-    const response = await axios.get(`https://api.npms.io/v2/package/${packageName}`);
+    const response =  (await axios.get(`https://api.npms.io/v2/package/${packageName}`)).data;
 
 
     const githubURL = response.collected.metadata.links.repository;
@@ -22,5 +24,5 @@ const parseNpmUri = async function (url) {
 }
 
 module.exports ={
-    parseNpmUri: parseNpmUri
+    parseNpmURL: parseNpmURL
 }

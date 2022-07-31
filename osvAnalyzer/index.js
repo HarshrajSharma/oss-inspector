@@ -16,17 +16,15 @@ async function osvAnalyzer(purl){
     const response = await axios.post('https://api.osv.dev/v1/query', postData)
 
     if (response.data.vulns === undefined) {
-        console.log('Not enough data to calculate score!');
+        console.log('Not enough data from osv.dev to calculate score!');
 
     } else {
         response.data.vulns.forEach(element => {
             vulnsCounter++;
 
             if (element.severity === undefined) {
-                console.log(vulnsCounter, 'OMKAY');
                 osvScore = osvScore + 4;
             } else {
-                console.log(vulnsCounter, element.severity[0].score);
                 osvScore = osvScore + cvss.calculateBaseScore(element.severity[0].score);
                 const individualReport = {
                     "id": element.id,
@@ -41,7 +39,6 @@ async function osvAnalyzer(purl){
         });
     }
     finalData.score = osvScore / vulnsCounter;
-    console.log(finalData);
     return finalData;
 }
 
